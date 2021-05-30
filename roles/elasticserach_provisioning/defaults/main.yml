@@ -1,0 +1,19 @@
+---
+# defaults file for elasticserach_provisioning
+
+cluster_name: elasticserach
+node_name: elasticserach-node-01
+
+
+path_data: /var/lib/elasticsearch
+path_logs: /var/log/elasticsearch
+
+
+network_host: 0.0.0.0
+http_port: 9200
+
+discovery_type: single-node
+
+
+# X-pack configuration 
+xpack_security_enabled: true
