@@ -5,3 +5,9 @@ You can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS
 $ export AWS_ACCESS_KEY_ID="anaccesskey"
 
 $ export AWS_SECRET_ACCESS_KEY="asecretkey"
+
+Commands: 
+
+$ terraform init
+$ terraform plan
+$ terraform apply 
