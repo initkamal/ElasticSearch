@@ -1,12 +1,24 @@
+# Kibana is served by a back end server. This setting specifies the port to use.
+
 server.port: {{ server_port }}
+
+# Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.
 
 server.host: "{{ server_host }}"
 
+# The Kibana server's name.  This is used for display purposes.
+
 server.name: "{{ server_name }}"
 
+# If your Elasticsearch is protected with basic authentication, these settings provide
+# the username and password that the Kibana server uses to perform maintenance on the Kibana
+# index at startup. Your Kibana users still need to authenticate with Elasticsearch, which
+# is proxied through the Kibana server.
+
+elasticsearch.username: "{{ elasticsearch_auth_username }}"
+elasticsearch.password: "{{ elasticsearch_auth_password }}"
+
+# The URLs of the Elasticsearch instances to use for all your queries.
+
 elasticsearch.hosts: ["{{elasticsearch_host }}"]
-
-elasticsearch.username: "{{ kibana_username }}"
-
-elasticsearch.password: "{{ kibana_password }}"
 
