@@ -16,4 +16,10 @@ discovery_type: single-node
 
 
 # X-pack configuration 
+
 xpack_security_enabled: true
+
+# Elasticsearch configuration directory
+
+elasticsearch_home: /usr/share/elasticsearch
+elasticsearch_conf_dir: /etc/elasticsearch
