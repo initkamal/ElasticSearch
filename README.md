@@ -9,5 +9,7 @@ $ export AWS_SECRET_ACCESS_KEY="asecretkey"
 Commands: 
 
 $ terraform init
+
 $ terraform plan
+
 $ terraform apply 
