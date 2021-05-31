@@ -1,15 +1,29 @@
-[ Environment Variables ]
+Elasticsearch Single Node Cluster
+=========
 
-You can provide your credentials via the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, environment variables, representing your AWS Access Key and AWS Secret Key, respectively.
+Using: 
+        Terraform
+        Ansible
 
-$ export AWS_ACCESS_KEY_ID="anaccesskey"
+Requirements
+------------
 
-$ export AWS_SECRET_ACCESS_KEY="asecretkey"
+Terraform v0.15.4
+ansible 2.9.6
+AWS Access Key and AWS Secret Key
 
-Commands: 
+Dependencies
+------------
 
-$ terraform init
+Export [ Environment Variables ]
 
-$ terraform plan
+        $export AWS_ACCESS_KEY_ID="anaccesskey"
+        $export AWS_SECRET_ACCESS_KEY="asecretkey"
 
-$ terraform apply 
+
+Example Plan
+----------------
+
+        $terraform init
+        $terraform plan
+        $terraform apply 
