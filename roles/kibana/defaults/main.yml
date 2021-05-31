@@ -12,6 +12,3 @@ elasticsearch_host: http://localhost:9200
 kibana_username: kbnAdmin
 kibana_password: A!@#kibana
 
-## xpack security settings
-
-#xpack_security_encryptionKey: mynameisanthonygonsalvesmainduniyameinakelahoo
