@@ -33,11 +33,6 @@
     name: elasticsearch
     enabled: yes
 
-- name: Start Elasticsearch Service
-  service:
-    name: elasticsearch
-    state: started
-
 # Xpack secuity configuration
 
 - name: create elasticsearch keystore
@@ -69,7 +64,35 @@
     ES_CONF_PATH: " {{ elasticsearch_conf_dir }} "
   no_log: true
 
-- name: Restarting elasticsearch service
+# TLS Configuration 
+
+- name:  Create a certificate directory 
+  file:
+    owner: root
+    group: '{{ elasticsearch_user_group }}'
+    mode: u=rwx,g+rx,o-rwx
+    path: '{{ elasticsearch_conf_dir }}/{{ elasticsearch_tls_cert_dir }}'
+    state: directory
+  when: elasticsearch_tls_cert_dir is defined
+
+- name: Check a certificate of authority
+  stat:
+    path: "{{ elasticsearch_conf_dir }}/{{ elasticsearch_tls_cert_dir }}/elastic-stack-ca.p12"
+  register: elastic_stack_ca_file
+
+- name: Generate a certificate of authority
+  args:
+    chdir: '{{ elasticsearch_conf_dir }}'
+  command: "'{{ elasticsearch_home }}'/bin/elasticsearch-certutil ca --out '{{ elasticsearch_conf_dir }}/{{ elasticsearch_tls_cert_dir }}'/elastic-stack-ca.p12 --pass '{{ elasticsearch_tls_cert_pass }}'"
+  when: not elastic_stack_ca_file.stat.exists
+
+- name: update permission
+  file:
+    mode: 0777
+    path: '{{ elasticsearch_conf_dir }}/{{ elasticsearch_tls_cert_dir }}/elastic-stack-ca.p12'
+
+- name: Start Elasticsearch Service
   service:
     name: elasticsearch
-    state: restarted
+    state: started
+

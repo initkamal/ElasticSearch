@@ -11,4 +11,3 @@
   roles:
     - common
     - elasticserach_provisioning
-    - kibana

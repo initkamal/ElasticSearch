@@ -18,8 +18,18 @@ discovery_type: single-node
 # X-pack configuration 
 
 xpack_security_enabled: true
+xpack.security.http.ssl.enabled: true
+
 
 # Elasticsearch configuration directory
 
 elasticsearch_home: /usr/share/elasticsearch
 elasticsearch_conf_dir: /etc/elasticsearch
+
+# Elasticsearch certificate
+
+elasticsearch_tls_cert_dir: "certs"
+elasticsearch_tls_cert_ca_pass: ""
+elasticsearch_tls_cert_pass: ""
+
+elasticsearch_user_group: "elasticsearch"
