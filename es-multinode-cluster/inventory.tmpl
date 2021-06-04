@@ -1,0 +1,4 @@
+[nodes]
+%{ for index, ip in instance-public-ip ~}
+${ip} is_master=${ index == 0 ? "true" : "false"}  ansible_host=${instance-public-ip[index]} ansible_host_private_ip=${instance-private-ip[index]} # ${instance-id[index]}
+%{ endfor ~}

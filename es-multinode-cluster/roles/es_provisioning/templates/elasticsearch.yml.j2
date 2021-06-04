@@ -1,0 +1,59 @@
+# ======================== Elasticsearch Configuration =========================
+#
+# NOTE: Elasticsearch comes with reasonable defaults for most settings.
+#       Before you set out to tweak and tune the configuration, make sure you
+#       understand what are you trying to accomplish and the consequences.
+#
+# The primary way of configuring a node is via this file. This template lists
+# the most important settings you may want to configure for a production cluster.
+#
+# Please consult the documentation for further information on configuration options:
+# https://www.elastic.co/guide/en/elasticsearch/reference/index.html
+#
+
+# ---------------------------------- Cluster -----------------------------------
+#
+# Use a descriptive name for your cluster:
+#
+
+cluster.name: {{ cluster_name }}
+
+# ------------------------------------ Node ------------------------------------
+#
+# Use a descriptive name for the node:
+
+# ----------------------------------- Paths ------------------------------------
+#
+# Path to directory where to store the data (separate multiple locations by comma):
+#
+
+path.data: {{ path_data }}
+path.logs: {{ path_logs }}
+
+# ----------------------------------- Memory -----------------------------------
+#
+# Lock the memory on startup:
+
+# ---------------------------------- Network -----------------------------------
+#
+# By default Elasticsearch is only accessible on localhost. Set a different
+# address here to expose this node on the network:
+
+network.host: {{ network_host }}
+http.port: {{ http_port }}
+
+# --------------------------------- Discovery ----------------------------------
+# For more information, consult the discovery and cluster formation module documentation.
+
+# Pass an initial list of hosts to perform discovery when this node is started:
+# The default list of hosts is ["127.0.0.1", "[::1]"]
+
+discovery.seed_hosts:
+{% for host in groups['servers'] %}
+   - {{ hostvars[host].ansible_host_private_ip }}
+{% endfor %}
+
+cluster.initial_master_nodes: 
+{% for host in groups['servers'] %}
+   - {{ hostvars[host].ansible_hostname }}
+{% endfor %}

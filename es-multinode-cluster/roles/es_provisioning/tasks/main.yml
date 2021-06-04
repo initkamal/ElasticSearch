@@ -1,0 +1,42 @@
+---
+# tasks file for roles/es_provisioning
+- name: Servers IPs
+  debug:
+    msg: '{{ ansible_host }}'
+
+- name: Installing JAVA
+  apt:
+    name: openjdk-8-jdk
+  
+- name: Import the Elasticsearch PGP Keyedit
+  apt_key:
+    url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+    state: present
+  
+- name: Adding Elasticsearch APT repository
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+
+- name: Update repositories cache and install ELASTICSEARCH    
+  apt:
+    name: elasticsearch
+    update_cache: yes
+
+- name: Enable service elasticsearch
+  service:
+    name: elasticsearch
+    enabled: yes
+
+- name: Replace default elasticsearch.yml
+  template:
+   src: elasticsearch.yml.j2
+   dest: /etc/elasticsearch/elasticsearch.yml
+  when: 
+    - groups['kamal'] is defined
+
+- name: Start Elasticsearch Service
+  service:
+    name: elasticsearch
+    state: restarted
+

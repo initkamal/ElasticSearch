@@ -1,0 +1,12 @@
+---
+# tasks file for common
+- name: Installing COMMON packages
+  apt: 
+    name:
+      - lsb-release
+      - curl
+      - zip
+      - unzip
+      - gnupg2
+      - apt-transport-https
+    state: present
