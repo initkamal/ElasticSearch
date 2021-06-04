@@ -49,11 +49,11 @@ http.port: {{ http_port }}
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 
 discovery.seed_hosts:
-{% for host in groups['servers'] %}
+{% for host in groups['nodes'] %}
    - {{ hostvars[host].ansible_host_private_ip }}
 {% endfor %}
 
 cluster.initial_master_nodes: 
-{% for host in groups['servers'] %}
+{% for host in groups['nodes'] %}
    - {{ hostvars[host].ansible_hostname }}
 {% endfor %}

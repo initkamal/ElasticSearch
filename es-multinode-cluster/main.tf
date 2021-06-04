@@ -73,19 +73,9 @@ resource "aws_instance" "elasticsearch_instance" {
       private_key = file("${path.module}/ssh-key/id_rsa")
     }
   }
-
-  #provisioner "local-exec" {
-  #  command = "${count.index}" == 0 ? "echo ${self.public_ip} is_master=true >> hosts" : "echo ${self.public_ip} is_master=false >> hosts"
-  #}
-
-}
-
-resource "null_resource" "ansible-running" {
-  triggers = {
-    always_run = "${timestamp()}"
-  }
   provisioner "local-exec" {
     command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u ubuntu -i inventory --private-key ssh-key/id_rsa  es_provisioning.yml"
 
   }
 }
+

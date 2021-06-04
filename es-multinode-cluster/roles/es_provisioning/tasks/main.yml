@@ -32,11 +32,8 @@
   template:
    src: elasticsearch.yml.j2
    dest: /etc/elasticsearch/elasticsearch.yml
-  when: 
-    - groups['kamal'] is defined
 
 - name: Start Elasticsearch Service
   service:
     name: elasticsearch
-    state: restarted
-
+    state: started
